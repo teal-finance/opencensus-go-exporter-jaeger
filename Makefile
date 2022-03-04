@@ -90,6 +90,6 @@ embedmd:
 
 .PHONY: install-tools
 install-tools:
-	go get -u golang.org/x/tools/cmd/cover
-	go get -u golang.org/x/lint/golint
-	go get -u github.com/rakyll/embedmd
+	go install golang.org/x/tools/cmd/cover@latest
+	go install golang.org/x/lint/golint@latest
+	go install github.com/rakyll/embedmd@latest
