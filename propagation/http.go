@@ -75,7 +75,6 @@ func (f *HTTPFormat) SpanContextFromRequest(req *http.Request) (sc trace.SpanCon
 	copy(sc.SpanID[:], spanID)
 
 	opt, err := strconv.Atoi(traceHeaderParts[len(traceHeaderParts)-1])
-
 	if err != nil {
 		return trace.SpanContext{}, false
 	}
@@ -88,9 +87,9 @@ func (f *HTTPFormat) SpanContextFromRequest(req *http.Request) (sc trace.SpanCon
 // SpanContextToRequest modifies the given request to include a Jaeger Trace header.
 func (f *HTTPFormat) SpanContextToRequest(sc trace.SpanContext, req *http.Request) {
 	header := fmt.Sprintf("%s:%s:%s:%d",
-		strings.Replace(sc.TraceID.String(), "0000000000000000", "", 1), //Replacing 0 if string is 8bit
+		strings.Replace(sc.TraceID.String(), "0000000000000000", "", 1), // Replacing 0 if string is 8bit
 		sc.SpanID.String(),
-		"", //Parent span deprecated and will therefore be ignored.
+		"", // Parent span deprecated and will therefore be ignored.
 		int64(sc.TraceOptions))
 	req.Header.Set(httpHeader, header)
 }

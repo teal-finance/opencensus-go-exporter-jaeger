@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"io"
 	"net"
-	"context"
 
 	"github.com/uber/jaeger-client-go/thrift"
 	"github.com/uber/jaeger-client-go/thrift-gen/agent"
@@ -26,7 +25,7 @@ import (
 	"github.com/uber/jaeger-client-go/thrift-gen/zipkincore"
 )
 
-// udpPacketMaxLength is the max size of UDP packet we want to send, synced with jaeger-agent
+// udpPacketMaxLength is the max size of UDP packet we want to send, synced with jaeger-agent.
 const udpPacketMaxLength = 65000
 
 // agentClientUDP is a UDP client to Jaeger agent that implements gen.Agent interface.
@@ -67,15 +66,16 @@ func newAgentClientUDP(hostPort string, maxPacketSize int) (*agentClientUDP, err
 		connUDP:       connUDP,
 		client:        client,
 		maxPacketSize: maxPacketSize,
-		thriftBuffer:  thriftBuffer}
+		thriftBuffer:  thriftBuffer,
+	}
 	return clientUDP, nil
 }
 
-// EmitBatch implements EmitBatch() of Agent interface
+// EmitBatch implements EmitBatch() of Agent interface.
 func (a *agentClientUDP) EmitBatch(batch *jaeger.Batch) error {
 	a.thriftBuffer.Reset()
-// 	a.client.SeqId = 0 // we have no need for distinct SeqIds for our one-way UDP messages
-	if err := a.client.EmitBatch(context.Background(), batch); err != nil {
+	// 	a.client.SeqId = 0 // we have no need for distinct SeqIds for our one-way UDP messages
+	if err := a.client.EmitBatch(batch); err != nil {
 		return err
 	}
 	if a.thriftBuffer.Len() > a.maxPacketSize {
@@ -86,7 +86,7 @@ func (a *agentClientUDP) EmitBatch(batch *jaeger.Batch) error {
 	return err
 }
 
-// EmitZipkinBatch implements EmitZipkinBatch() of Agent interface
+// EmitZipkinBatch implements EmitZipkinBatch() of Agent interface.
 func EmitZipkinBatch(spans []*zipkincore.Span) (err error) {
 	return fmt.Errorf("not implemented")
 }

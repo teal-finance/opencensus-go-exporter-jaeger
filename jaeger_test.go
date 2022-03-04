@@ -21,15 +21,13 @@ import (
 	"time"
 
 	"github.com/uber/jaeger-client-go/thrift-gen/jaeger"
-
 	"go.opencensus.io/trace"
 )
 
 // TODO(jbd): Test export.
 
 func Test_bytesToInt64(t *testing.T) {
-	type args struct {
-	}
+	type args struct{}
 	tests := []struct {
 		buf  []byte
 		want int64

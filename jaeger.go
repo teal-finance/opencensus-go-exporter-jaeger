@@ -24,11 +24,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"context"
 
 	"github.com/uber/jaeger-client-go/thrift"
 	"github.com/uber/jaeger-client-go/thrift-gen/jaeger"
-
 	"go.opencensus.io/trace"
 	"google.golang.org/api/support/bundler"
 )
@@ -72,7 +70,7 @@ type Options struct {
 	// Process contains the information about the exporting process.
 	Process Process
 
-	//BufferMaxCount defines the total number of traces that can be buffered in memory
+	// BufferMaxCount defines the total number of traces that can be buffered in memory
 	BufferMaxCount int
 }
 
@@ -154,23 +152,23 @@ type Process struct {
 }
 
 // Tag defines a key-value pair
-// It is limited to the possible conversions to *jaeger.Tag by attributeToTag
+// It is limited to the possible conversions to *jaeger.Tag by attributeToTag.
 type Tag struct {
 	key   string
 	value interface{}
 }
 
-// BoolTag creates a new tag of type bool, exported as jaeger.TagType_BOOL
+// BoolTag creates a new tag of type bool, exported as jaeger.TagType_BOOL.
 func BoolTag(key string, value bool) Tag {
 	return Tag{key, value}
 }
 
-// StringTag creates a new tag of type string, exported as jaeger.TagType_STRING
+// StringTag creates a new tag of type string, exported as jaeger.TagType_STRING.
 func StringTag(key string, value string) Tag {
 	return Tag{key, value}
 }
 
-// Int64Tag creates a new tag of type int64, exported as jaeger.TagType_LONG
+// Int64Tag creates a new tag of type int64, exported as jaeger.TagType_LONG.
 func Int64Tag(key string, value int64) Tag {
 	return Tag{key, value}
 }
@@ -360,7 +358,7 @@ func (e *Exporter) uploadCollector(batch *jaeger.Batch) error {
 
 func serialize(obj thrift.TStruct) (*bytes.Buffer, error) {
 	buf := thrift.NewTMemoryBuffer()
-	if err := obj.Write(context.Background(),thrift.NewTBinaryProtocolTransport(buf)); err != nil {
+	if err := obj.Write(thrift.NewTBinaryProtocolTransport(buf)); err != nil {
 		return nil, err
 	}
 	return buf.Buffer, nil
