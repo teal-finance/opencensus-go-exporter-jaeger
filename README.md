@@ -27,8 +27,8 @@ This library depends on [github.com/uber/jaeger-client-go](https://github.com/ja
 ## Installation
 
 ```
-$ go get -u teal-finance/opencensus-go-exporter-jaeger/jaeger
+$ go get -u github.com/teal-finance/opencensus-go-exporter-jaeger
 ```
 
-[godoc-image]: https://godoc.org/teal-finance/opencensus-go-exporter-jaeger/jaeger?status.svg
-[godoc-url]: https://godoc.org/teal-finance/opencensus-go-exporter-jaeger/jaeger
+[godoc-image]: https://godoc.org/github.com/teal-finance/opencensus-go-exporter-jaeger?status.svg
+[godoc-url]: https://godoc.org/github.com/teal-finance/opencensus-go-exporter-jaeger

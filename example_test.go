@@ -17,7 +17,7 @@ package jaeger_test
 import (
 	"log"
 
-	"contrib.go.opencensus.io/exporter/jaeger"
+	jaeger "github.com/teal-finance/opencensus-go-exporter-jaeger"
 	"go.opencensus.io/trace"
 )
 

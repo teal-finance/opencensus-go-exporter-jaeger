@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Package jaeger contains an OpenCensus tracing exporter for Jaeger.
-package jaeger // import "contrib.go.opencensus.io/exporter/jaeger"
+package jaeger // import "github.com/teal-finance/opencensus-go-exporter-jaeger"
 
 import (
 	"bytes"
