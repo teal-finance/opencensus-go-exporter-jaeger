@@ -16,7 +16,10 @@ EMBEDMD=embedmd
 README_FILES := $(shell find . -name '*README.md' | sort | tr '\n' ' ')
 
 
-.DEFAULT_GOAL := fmt-lint-vet-embedmd-test
+.DEFAULT_GOAL := fmt-vet-embedmd-test
+
+.PHONY: fmt-vet-embedmd-test
+fmt-vet-embedmd-test: fmt vet embedmd test
 
 .PHONY: fmt-lint-vet-embedmd-test
 fmt-lint-vet-embedmd-test: fmt lint vet embedmd test
